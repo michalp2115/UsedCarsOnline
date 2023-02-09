@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Auction>
+@{
+    ViewData["Title"] = "Auction";
+}
+
+<h1 class="mb-3">Auction List</h1>
+<table class="table table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Car Name</th>
+            <th>Auction ID</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <div style="display:inline-block; text-align:right;">
+            <a class="btn btn-primary" asp-controller="Auction" asp-action="Create">Create</a>
+        </div>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.Make @obj.Model</td>
+                <td>@obj.AuctionId</td>
+                <td style="text-align: right;">
+                    <a class="btn btn-secondary mr-2" asp-controller="Auction" asp-action="Details" asp-route-id="@obj.AuctionId">Details</a>
+                    <a class="btn btn-danger mr-2" asp-controller="Auction" asp-action="Delete" asp-route-id="@obj.AuctionId">Delete</a>
+                    <a class="btn btn-danger mr-2" asp-controller="Auction" asp-action="Edit" asp-route-id="@obj.AuctionId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,23 @@
+﻿@model Auction
+@{
+    ViewData["Title"] = "Auction Details";
+}
+<form method="post" asp-action="Delete">
+    <input asp-for="AuctionId" hidden/>
+    <div class="border p-3 mt-4">
+            <div class="row pb-2">
+                <h2 class="text-primary"> Delete IsLimited Status</h2>
+            <hr />
+        </div>
+        <div asp-validation-summary="All"></div>
+        <div class="mb-3">
+            <label asp-for="Make"></label>
+            <input asp-for="Make" disabled class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+        <a asp-controller="Auction" asp-action="Index" class="btn btn-primary" style="width:200px">
+            Back To List
+        </a>
+    </div>
+</form>
