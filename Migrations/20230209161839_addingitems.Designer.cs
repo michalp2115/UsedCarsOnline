@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UsedCarsOnline.Data;
 
@@ -11,9 +12,11 @@ using UsedCarsOnline.Data;
 namespace UsedCarsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230209161839_addingitems")]
+    partial class addingitems
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,10 +89,6 @@ namespace UsedCarsOnline.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
@@ -141,10 +140,6 @@ namespace UsedCarsOnline.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -175,10 +170,12 @@ namespace UsedCarsOnline.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -215,10 +212,12 @@ namespace UsedCarsOnline.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -305,7 +304,7 @@ namespace UsedCarsOnline.Migrations
                             EnginePower = 150,
                             FuelType = "Petrol",
                             Gearbox = "Automatic",
-                            ImagePath = "/images/image1.jpg",
+                            ImagePath = "image1.jpg",
                             Make = "Toyota",
                             Mileage = 50000,
                             Model = "Camry",
@@ -322,7 +321,7 @@ namespace UsedCarsOnline.Migrations
                             EnginePower = 140,
                             FuelType = "Petrol",
                             Gearbox = "Manual",
-                            ImagePath = "/images/image2.jpg",
+                            ImagePath = "image2.jpg",
                             Make = "Honda",
                             Mileage = 40000,
                             Model = "Civic",
@@ -339,31 +338,13 @@ namespace UsedCarsOnline.Migrations
                             EnginePower = 160,
                             FuelType = "Petrol",
                             Gearbox = "Automatic",
-                            ImagePath = "/images/image3.jpg",
+                            ImagePath = "image3.jpg",
                             Make = "Mazda",
                             Mileage = 30000,
                             Model = "3",
                             Price = 20000,
                             Year = "2019"
                         });
-                });
-
-            modelBuilder.Entity("UsedCarsOnline.Models.User", b =>
-                {
-                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
-
-                    b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

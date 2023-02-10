@@ -3,6 +3,8 @@ using UsedCarsOnline.Data;
 using UsedCarsOnline.Services;
 using UsedCarsOnline.Services.IRepository;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using UsedCarsOnline.StaticDetails;
 
 namespace UsedCarsOnline
 {
@@ -20,8 +22,8 @@ namespace UsedCarsOnline
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
                builder.Configuration.GetConnectionString("DefaultConnection")
                ));
-
-            builder.Services.AddDefaultIdentity<IdentityUser>()
+            builder.Services.AddSingleton<IEmailSender, EmailSender>();
+            builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddDefaultTokenProviders()
                .AddEntityFrameworkStores<ApplicationDbContext>();
 
             builder.Services.AddTransient<IAuctionRepository, AuctionRepository>();
@@ -47,7 +49,6 @@ namespace UsedCarsOnline
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
-
             app.Run();
         }
     }
