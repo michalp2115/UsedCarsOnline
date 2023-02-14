@@ -47,5 +47,10 @@ namespace UsedCarsOnline.Models
 
         [NotMapped]
         public IFormFile ImageFile { get; set; }
+
+        public string? UserId { get; set; }
+        [ForeignKey("UserId")]
+        [ValidateNever]
+        public User User { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using UsedCarsOnline.Data;
 namespace UsedCarsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230210003918_dbpopop")]
-    partial class dbpopop
+    [Migration("20230213235754_dbini")]
+    partial class dbini
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -289,66 +289,19 @@ namespace UsedCarsOnline.Migrations
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AuctionId");
 
-                    b.ToTable("Auctions");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            AuctionId = 1,
-                            BodyType = "Sedan",
-                            Color = "White",
-                            Description = "Description for the Toyota Camry",
-                            EngineCapacity = 2000,
-                            EnginePower = 150,
-                            FuelType = "Petrol",
-                            Gearbox = "Automatic",
-                            ImagePath = "/images/image1.jpg",
-                            Make = "Toyota",
-                            Mileage = 50000,
-                            Model = "Camry",
-                            Price = 10000,
-                            Year = "2015"
-                        },
-                        new
-                        {
-                            AuctionId = 2,
-                            BodyType = "Sedan",
-                            Color = "Black",
-                            Description = "Description for the Honda Civic",
-                            EngineCapacity = 1800,
-                            EnginePower = 140,
-                            FuelType = "Petrol",
-                            Gearbox = "Manual",
-                            ImagePath = "/images/image2.jpg",
-                            Make = "Honda",
-                            Mileage = 40000,
-                            Model = "Civic",
-                            Price = 15000,
-                            Year = "2017"
-                        },
-                        new
-                        {
-                            AuctionId = 3,
-                            BodyType = "Sedan",
-                            Color = "Red",
-                            Description = "Description for the Mazda 3",
-                            EngineCapacity = 2000,
-                            EnginePower = 160,
-                            FuelType = "Petrol",
-                            Gearbox = "Automatic",
-                            ImagePath = "/images/image3.jpg",
-                            Make = "Mazda",
-                            Mileage = 30000,
-                            Model = "3",
-                            Price = 20000,
-                            Year = "2019"
-                        });
+                    b.ToTable("Auctions");
                 });
 
             modelBuilder.Entity("UsedCarsOnline.Models.User", b =>
@@ -418,6 +371,17 @@ namespace UsedCarsOnline.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("UsedCarsOnline.Models.Auction", b =>
+                {
+                    b.HasOne("UsedCarsOnline.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 #pragma warning restore 612, 618
         }

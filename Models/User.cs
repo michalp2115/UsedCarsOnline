@@ -19,6 +19,5 @@ namespace UsedCarsOnline.Models
         [DataType(DataType.Date)]
         public DateTime DateOfBirth { get; set; }
 
-
     }
 }

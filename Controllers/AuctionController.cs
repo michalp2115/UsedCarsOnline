@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.IO;
+using System.Security.Claims;
 using UsedCarsOnline.Data;
 using UsedCarsOnline.Models;
 using UsedCarsOnline.Services.IRepository;
@@ -13,11 +15,15 @@ namespace UsedCarsOnline.Controllers
     {
         private readonly IWebHostEnvironment _hostEnviroment;
         private readonly IAuctionRepository _auctionRepository;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IHttpContextAccessor _httpContextAccesor;
 
-        public AuctionController(IWebHostEnvironment hostEnviroment, IAuctionRepository auctionRepository)
+        public AuctionController(IWebHostEnvironment hostEnviroment, IAuctionRepository auctionRepository, UserManager<IdentityUser> userManager, IHttpContextAccessor httpContextAccesor)
         {
             _hostEnviroment = hostEnviroment;
             _auctionRepository = auctionRepository;
+            _userManager = userManager;
+            _httpContextAccesor = httpContextAccesor;
         }
 
         public IActionResult Index()
@@ -34,6 +40,9 @@ namespace UsedCarsOnline.Controllers
         [HttpPost]
         public IActionResult Create(Auction obj)
         {
+            var userId = _httpContextAccesor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            obj.UserId= userId;
+
             if (obj.ImageFile != null && obj.ImageFile.Length > 0)
             {
                 var folderPath = Path.Combine(_hostEnviroment.WebRootPath, "images");
@@ -68,6 +77,9 @@ namespace UsedCarsOnline.Controllers
         [HttpPost]
         public IActionResult Edit(Auction obj)
         {
+            var userId = _httpContextAccesor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            obj.UserId = userId;
+
             if (obj.ImageFile != null && obj.ImageFile.Length > 0)
             {
                 var folderPath = Path.Combine(_hostEnviroment.WebRootPath, "images");
@@ -121,6 +133,12 @@ namespace UsedCarsOnline.Controllers
                 return NotFound();
             }
             return View(auction);
+        }
+        public IActionResult MyAuctions()
+        {
+            var userId = _httpContextAccesor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var objAuctionList = _auctionRepository.GetAll().Where(a => a.UserId == userId);
+            return View(objAuctionList);
         }
     }
 }

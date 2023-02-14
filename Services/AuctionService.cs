@@ -38,5 +38,7 @@ namespace UsedCarsOnline.Services
             _context.Auctions.Remove(auction);
             _context.SaveChanges();
         }
+
+
     }
 }
