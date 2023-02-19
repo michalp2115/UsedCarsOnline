@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Dynamic;
 using UsedCarsOnline.Data;
 using UsedCarsOnline.Models;
 using UsedCarsOnline.Services.IRepository;
@@ -54,6 +55,31 @@ namespace UsedCarsOnline.Controllers
             {
                 auctions = auctions.Where(x => x.Year.Contains(search.Year));
             }
+            if (!String.IsNullOrEmpty(search.Price))
+            {
+                auctions = auctions.Where(x => x.Price.Contains(search.Price));
+            }
+            if (!String.IsNullOrEmpty(search.Mileage))
+            {
+                auctions = auctions.Where(x => x.Mileage.Contains(search.Mileage));
+            }
+            if (!String.IsNullOrEmpty(search.Color))
+            {
+                auctions = auctions.Where(x => x.Color.Contains(search.Color));
+            }
+            if (!String.IsNullOrEmpty(search.EngineCapacity))
+            {
+                auctions = auctions.Where(x => x.EngineCapacity.Contains(search.EngineCapacity));
+            }
+            if (!String.IsNullOrEmpty(search.EnginePower))
+            {
+                auctions = auctions.Where(x => x.EnginePower.Contains(search.EnginePower));
+            }
+            if (!String.IsNullOrEmpty(search.Gearbox))
+            {
+                auctions = auctions.Where(x => x.Gearbox.Contains(search.Gearbox));
+            }
+
 
             return View(auctions.ToList());
         }

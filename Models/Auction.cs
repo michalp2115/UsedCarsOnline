@@ -25,16 +25,16 @@ namespace UsedCarsOnline.Models
 
         public string Year { get; set; }
 
-        public int Price { get; set; }
+        public string Price { get; set; }
 
-        public int Mileage { get; set; }
+        public string Mileage { get; set; }
 
         [MaxLength(20)]
         public string Color { get; set; }
 
-        public int EngineCapacity { get; set; }
+        public string EngineCapacity { get; set; }
 
-        public int EnginePower { get; set; }
+        public string EnginePower { get; set; }
 
         [MaxLength(20)]
         public string Gearbox { get; set; }
