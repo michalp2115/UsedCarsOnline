@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UsedCarsOnline.Data;
 
@@ -11,9 +12,11 @@ using UsedCarsOnline.Data;
 namespace UsedCarsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230314193016_cbs")]
+    partial class cbs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -307,7 +310,7 @@ namespace UsedCarsOnline.Migrations
                     b.HasData(
                         new
                         {
-                            AuctionId = 10,
+                            AuctionId = 1,
                             BodyType = "Sedan",
                             Color = "White",
                             Description = "Description for the Toyota Camry",
@@ -320,12 +323,12 @@ namespace UsedCarsOnline.Migrations
                             Mileage = "50000",
                             Model = "Camry",
                             Price = "10000",
-                            UserId = "1",
+                            UserId = "",
                             Year = "2015"
                         },
                         new
                         {
-                            AuctionId = 15,
+                            AuctionId = 2,
                             BodyType = "Sedan",
                             Color = "Black",
                             Description = "Description for the Honda Civic",
@@ -338,12 +341,12 @@ namespace UsedCarsOnline.Migrations
                             Mileage = "50000",
                             Model = "Civic",
                             Price = "10000",
-                            UserId = "1",
+                            UserId = "",
                             Year = "2017"
                         },
                         new
                         {
-                            AuctionId = 20,
+                            AuctionId = 3,
                             BodyType = "Sedan",
                             Color = "Red",
                             Description = "Description for the Mazda 3",
@@ -356,7 +359,7 @@ namespace UsedCarsOnline.Migrations
                             Mileage = "50000",
                             Model = "3",
                             Price = "10000",
-                            UserId = "1",
+                            UserId = "",
                             Year = "2019"
                         });
                 });
@@ -383,15 +386,15 @@ namespace UsedCarsOnline.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b48ad3da-c2e8-46e2-ad9d-7d0eafc3ae64",
+                            ConcurrencyStamp = "458bdcd5-9db3-4c24-be24-b8a11833f58b",
                             Email = "abc@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             PasswordHash = "XxXpLo123!",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7d5a089d-1639-45b3-99df-5ef87f76ce9c",
+                            SecurityStamp = "6bb2a763-ca1f-4918-9990-13261e17be16",
                             TwoFactorEnabled = false,
-                            DateOfBirth = new DateTime(2023, 3, 14, 20, 32, 5, 890, DateTimeKind.Local).AddTicks(7831),
+                            DateOfBirth = new DateTime(2023, 3, 14, 20, 30, 16, 593, DateTimeKind.Local).AddTicks(6780),
                             LastName = "Cebula",
                             Name = "Wojtek"
                         });

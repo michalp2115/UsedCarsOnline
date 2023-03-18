@@ -12,8 +12,8 @@ using UsedCarsOnline.Data;
 namespace UsedCarsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230215191818_olol")]
-    partial class olol
+    [Migration("20230311113854_dbini")]
+    partial class dbini
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

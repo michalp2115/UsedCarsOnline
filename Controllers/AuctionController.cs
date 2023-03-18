@@ -8,6 +8,7 @@ using System.Security.Claims;
 using UsedCarsOnline.Data;
 using UsedCarsOnline.Models;
 using UsedCarsOnline.Services.IRepository;
+using UsedCarsOnline.ViewModels;
 
 namespace UsedCarsOnline.Controllers
 {
@@ -75,7 +76,7 @@ namespace UsedCarsOnline.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Auction obj)
+        public IActionResult Edit(Auction obj, int id)
         {
             var userId = _httpContextAccesor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
             obj.UserId = userId;
@@ -95,7 +96,7 @@ namespace UsedCarsOnline.Controllers
                 }
                 obj.ImagePath = "/images/" + obj.ImageFile.FileName;
             }
-            _auctionRepository.Update(obj);
+            _auctionRepository.Update(obj, id);
             return RedirectToAction("Index");
         }
 
@@ -128,6 +129,7 @@ namespace UsedCarsOnline.Controllers
                 return BadRequest();
             }
             var auction = _auctionRepository.Get(id.Value);
+            
             if (auction == null)
             {
                 return NotFound();

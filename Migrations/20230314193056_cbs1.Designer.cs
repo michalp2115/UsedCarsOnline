@@ -12,8 +12,8 @@ using UsedCarsOnline.Data;
 namespace UsedCarsOnline.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230213235754_dbini")]
-    partial class dbini
+    [Migration("20230314193056_cbs1")]
+    partial class cbs1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -253,11 +253,13 @@ namespace UsedCarsOnline.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EngineCapacity")
-                        .HasColumnType("int");
+                    b.Property<string>("EngineCapacity")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EnginePower")
-                        .HasColumnType("int");
+                    b.Property<string>("EnginePower")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FuelType")
                         .IsRequired()
@@ -278,16 +280,18 @@ namespace UsedCarsOnline.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Mileage")
-                        .HasColumnType("int");
+                    b.Property<string>("Mileage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("int");
+                    b.Property<string>("Price")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -302,6 +306,62 @@ namespace UsedCarsOnline.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Auctions");
+
+                    b.HasData(
+                        new
+                        {
+                            AuctionId = 1,
+                            BodyType = "Sedan",
+                            Color = "White",
+                            Description = "Description for the Toyota Camry",
+                            EngineCapacity = "2000",
+                            EnginePower = "150",
+                            FuelType = "Petrol",
+                            Gearbox = "Automatic",
+                            ImagePath = "/images/image1.jpg",
+                            Make = "Toyota",
+                            Mileage = "50000",
+                            Model = "Camry",
+                            Price = "10000",
+                            UserId = "1",
+                            Year = "2015"
+                        },
+                        new
+                        {
+                            AuctionId = 2,
+                            BodyType = "Sedan",
+                            Color = "Black",
+                            Description = "Description for the Honda Civic",
+                            EngineCapacity = "2000",
+                            EnginePower = "150",
+                            FuelType = "Petrol",
+                            Gearbox = "Manual",
+                            ImagePath = "/images/image2.jpg",
+                            Make = "Honda",
+                            Mileage = "50000",
+                            Model = "Civic",
+                            Price = "10000",
+                            UserId = "1",
+                            Year = "2017"
+                        },
+                        new
+                        {
+                            AuctionId = 3,
+                            BodyType = "Sedan",
+                            Color = "Red",
+                            Description = "Description for the Mazda 3",
+                            EngineCapacity = "2000",
+                            EnginePower = "150",
+                            FuelType = "Petrol",
+                            Gearbox = "Automatic",
+                            ImagePath = "/images/image3.jpg",
+                            Make = "Mazda",
+                            Mileage = "50000",
+                            Model = "3",
+                            Price = "10000",
+                            UserId = "1",
+                            Year = "2019"
+                        });
                 });
 
             modelBuilder.Entity("UsedCarsOnline.Models.User", b =>
@@ -320,6 +380,24 @@ namespace UsedCarsOnline.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "9440036d-8fec-49e1-bcf8-93a856e061db",
+                            Email = "abc@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "XxXpLo123!",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "9589dac5-48c6-410f-853d-fec642eeaeef",
+                            TwoFactorEnabled = false,
+                            DateOfBirth = new DateTime(2023, 3, 14, 20, 30, 56, 280, DateTimeKind.Local).AddTicks(2731),
+                            LastName = "Cebula",
+                            Name = "Wojtek"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

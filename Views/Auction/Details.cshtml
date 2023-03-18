@@ -3,7 +3,160 @@
     ViewData["Title"] = "Auction Details";
 }
 
-<h1>@Model.Make @Model.Model</h1>
-<p>
+<style>
+    /* Custom CSS styles */
+    body{
+        font-family: 'Anton', sans-serif;
+    }
+    .car-img {
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        max-height: 100%;
+    }
+
+        .car-img img {
+            width: 100%;
+            height: auto;
+        }
+
+    table {
+        width: 100%;
+        max-width: 100%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        padding: 10px;
+    }
+
+    td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+        /* Highlight the price field */
+        td.price {
+            font-weight: bold;
+            color: green;
+        }
+
+    .description {
+        width: 80%;
+        margin: 20px auto;
+        background-color: #f2f2f2;
+        padding: 10px;
+        border: 1px solid #ddd;
+    }
+
+        .description table {
+            width: 100%;
+            margin: 0;
+            border-collapse: collapse;
+        }
+
+        .description th {
+            background-color: #fff;
+            border: none;
+        }
+
+        .description td {
+            border: none;
+        }
+
+    .btn {
+        position: absolute;
+        margin-top: 25px;
+        margin-left: 718px;
+    }
+
+    
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<body>
+<div class="car-img">
     <img src="@Model.ImagePath" alt="Auction Image">
-</p>
+</div>
+
+<div>
+    <h1>
+        @Model.Make @Model.Model
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3" style="width:200px">
+            Back To List
+        </a>
+    </h1>
+</div>
+
+<div class="text-center">
+    <table style="float: right; margin-right: auto;">
+        <tr>
+            <th>Name:</th>
+            <td>@Model.User.Name</td>
+        </tr>
+        <tr>
+            <th>Last Name:</th>
+            <td>@Model.User.LastName</td>
+        </tr>
+        <tr>
+            <th>Phone Number:</th>
+            <td>@Model.User.PhoneNumber</td>
+        </tr>
+    </table>
+    <table style="clear: both;">
+        <tr>
+            <th>Body Type</th>
+            <td>@Model.BodyType</td>
+        </tr>
+        <tr>
+            <th>Fuel Type</th>
+            <td>@Model.FuelType</td>
+        </tr>
+        <tr>
+            <th>Year</th>
+            <td>@Model.Year</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td class="price">@Model.Price $</td>
+        </tr>
+        <tr>
+            <th>Mileage</th>
+            <td>@Model.Mileage mi</td>
+        </tr>
+        <tr>
+            <th>Color</th>
+            <td>@Model.Color</td>
+        </tr>
+        <tr>
+            <th>Engine Capacity</th>
+            <td>@Model.EngineCapacity cm³</td>
+        </tr>
+        <tr>
+            <th>Engine Power</th>
+            <td>@Model.EnginePower HP</td>
+        </tr>
+        <tr>
+            <th>Gearbox</th>
+            <td>@Model.Gearbox</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td class="description">@Model.Description</td>
+        </tr>
+    </table>
+</div>
+
+</body>
+
+
+
+
+<script>
+</script>

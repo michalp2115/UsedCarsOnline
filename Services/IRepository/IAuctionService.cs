@@ -8,7 +8,7 @@ namespace UsedCarsOnline.Services.IRepository
         IEnumerable<Auction> GetAll();
         Auction Get(int id);
         Auction Add(Auction auction);
-        void Update(Auction auction);
+        void Update(Auction auction, int id);
         void Delete(int id);
     }
 }

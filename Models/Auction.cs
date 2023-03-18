@@ -52,5 +52,6 @@ namespace UsedCarsOnline.Models
         [ForeignKey("UserId")]
         [ValidateNever]
         public User User { get; set; }
+
     }
 }

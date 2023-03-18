@@ -19,7 +19,7 @@ namespace UsedCarsOnline.Services
         }
         public Auction Get(int id)
         {
-            return _context.Auctions.Find(id);
+            return _context.Auctions.Include(x=>x.User).FirstOrDefault(x=>x.AuctionId == id);
         }
         public Auction Add(Auction auction)
         {
@@ -27,10 +27,37 @@ namespace UsedCarsOnline.Services
             _context.SaveChanges();
             return auction;
         }
-        public void Update(Auction auction)
+        public void Update(Auction auction, int id)
         {
-            _context.Auctions.Update(auction);
+            //_context.Auctions.Update(auction);
+            var toUpdate = _context.Auctions.FirstOrDefault(x => x.AuctionId == id);
+            string path = toUpdate.ImagePath;
+            
+
+            if (toUpdate != null)
+            {
+                toUpdate.AuctionId = auction.AuctionId;
+                toUpdate.ImageFile = auction.ImageFile;
+                toUpdate.ImagePath = auction.ImagePath;
+                toUpdate.Make = auction.Make;
+                toUpdate.Model = auction.Model;
+                toUpdate.BodyType = auction.BodyType;
+                toUpdate.FuelType = auction.FuelType;
+                toUpdate.Year = auction.Year;
+                toUpdate.Price = auction.Price;
+                toUpdate.Mileage = auction.Mileage;
+                toUpdate.Color = auction.Color;
+                toUpdate.EngineCapacity = auction.EngineCapacity;
+                toUpdate.EnginePower = auction.EnginePower;
+                toUpdate.Gearbox = auction.Gearbox;
+                toUpdate.Description = auction.Description;
+            }
+            if(auction.ImagePath == null)
+            {
+                toUpdate.ImagePath = path;
+            }
             _context.SaveChanges();
+            
         }
         public void Delete(int id)
         {
